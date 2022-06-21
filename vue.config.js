@@ -4,5 +4,14 @@ module.exports = defineConfig({
   transpileDependencies: true,
   publicPath: '/',
   productionSourceMap: false,
-  filenameHashing: false 
+  filenameHashing: false,
+
+  // configureWebpack: {
+  //   resolve: {
+  //     alias: {
+  //       "@": path.resolve(__dirname, vueSrc)
+  //     },
+  //     extensions: ['.js', '.vue', '.json']
+  //   }
+  // }
 })

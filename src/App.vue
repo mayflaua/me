@@ -1,44 +1,71 @@
 <template>
-  <div>
-    <li v-for="link in menu" :key="link.route">
-      <router-link
-      :to="{ name: link.route }"
-      exact-active-class="active">
-        {{ link.title }}
-      </router-link> 
-    </li>
-
-    <router-view/>
+<div class="body">
+  <app-header></app-header>
+  <div class="content">
+    <div class="container">
+      <router-view v-slot="{ Component, route }">
+        <transition name="fade" mode="out-in">
+          <div :key="route.name">
+            <component :is="Component" />
+          </div>
+        </transition>
+      </router-view>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      menu: [
-        {
-          route: 'tools',
-          title: 'инструменты'
-        },
-        {
-          route: 'games',
-          title: 'игры'
-        },
-        {
-          route: 'sites',
-          title: 'сайты'
-        },
-        {
-          route: 'contact',
-          title: 'связаться'
-        },
-      ]
-    })
-  }
+import AppHeader from "./components/AppHeader.vue";
+
+export default {
+  data: () => ({}),
+  components: {
+    AppHeader,
+  },
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped>
-  .active {
-    color: red;
+@import "./style/normalize.css";
+@import "./style/colors.scss";
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.3s ease;
   }
+  &-enter,
+  &-leave-active {
+    opacity: 0;
+  }
+}
+
+.body {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
+
+  &.noscroll {
+    max-height: 100%;
+    overflow: hidden;
+    & > .content {
+      pointer-events: none;
+    }
+  }
+}
+
+.container {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 100px 0 150px 0;
+  transition: filter 0.2s;
+  &.blur {
+    filter: blur(10px);
+  }
+}
 </style>
