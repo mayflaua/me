@@ -1,7 +1,6 @@
 <template>
-
-  <div class="sent">  <app-back-button/>
-
+  <app-back-button />
+  <div class="sent">
     Форма должна была быть отправлена, но что-то пошло не так...
   </div>
   <img
@@ -15,16 +14,28 @@
   <div :class="loaded ? 'loaded' : ''" class="links">
     Но со мной можно связаться другими способами!
   </div>
-  <a :class="loaded ? 'loaded' : ''" class="link link-gh" target="_blank" href="https://github.com/mayflaua">Я на GitHub</a>
-  <a :class="loaded ? 'loaded' : ''" class="link link-tg" target="_blank" href="https://t.me/pogas">Я в Telegram</a>
+  <a
+    :class="loaded ? 'loaded' : ''"
+    class="link link-gh"
+    target="_blank"
+    href="https://github.com/mayflaua"
+    >Я на GitHub</a
+  >
+  <a
+    :class="loaded ? 'loaded' : ''"
+    class="link link-tg"
+    target="_blank"
+    href="https://t.me/pogas"
+    >Я в Telegram</a
+  >
 </template>
 
 <script>
-import AppBackButton from './AppBackButton.vue'
+import AppBackButton from "./AppBackButton.vue";
 
 export default {
   components: {
-    AppBackButton
+    AppBackButton,
   },
   data: () => ({
     loaded: false,
@@ -33,7 +44,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.loaded = true;
-    }, 300);
+    }, 3000);
   },
 };
 </script>
@@ -43,7 +54,7 @@ export default {
   font-size: 30px;
   font-weight: 600;
   text-align: center;
-  margin: 0 auto;
+  margin: 12px auto;
 }
 
 .loading {
@@ -91,7 +102,7 @@ export default {
 
 .link {
   display: block;
-  transition: .2s ease;
+  transition: 0.2s ease;
 
   padding: 0 10px;
   margin-top: 15px;
@@ -109,17 +120,16 @@ export default {
     background-color: #ffaa00;
     color: white;
     box-shadow: 0px 5px 5px 2px rgba(0, 0, 0, 0.4);
-
   }
 
   &-gh {
-    background-image: url('@/assets/github.png');
+    background-image: url("@/assets/github.png");
     background-repeat: no-repeat;
     background-position: 90% center;
   }
 
   &-tg {
-    background-image: url('@/assets/telegram.png');
+    background-image: url("@/assets/telegram.png");
     background-repeat: no-repeat;
     background-position: 90% center;
   }

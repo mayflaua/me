@@ -40,6 +40,7 @@ export default {};
     transition: 0.3s ease;
 
     content: "Назад";
+    text-align: center;
     font-size: 20px;
     line-height: 40px;
     font-weight: 500;

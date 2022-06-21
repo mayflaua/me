@@ -1,18 +1,18 @@
 <template>
-<div class="body">
-  <app-header></app-header>
-  <div class="content">
-    <div class="container">
-      <router-view v-slot="{ Component, route }">
-        <transition name="fade" mode="out-in">
-          <div :key="route.name">
-            <component :is="Component" />
-          </div>
-        </transition>
-      </router-view>
+  <div class="body">
+    <app-header></app-header>
+    <div class="content">
+      <div class="container">
+        <router-view v-slot="{ Component, route }">
+          <transition name="fade" mode="out-in">
+            <div :key="route.name">
+              <component :is="Component" />
+            </div>
+          </transition>
+        </router-view>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -66,6 +66,22 @@ export default {
   transition: filter 0.2s;
   &.blur {
     filter: blur(10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px 0;
+  }
+
+  .container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 450px) {
+  .content {
+    padding: 0;
   }
 }
 </style>
