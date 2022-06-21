@@ -1,48 +1,43 @@
 <template>
   <div class="item">
     <div class="item-head"></div>
-    <div class="item-avatar"
-    :style="{ backgroundImage: `url(${require('@/assets/' + icon)})` }"></div>
+    <div
+      class="item-avatar"
+      :style="{ backgroundImage: `url(${require('@/assets/' + icon)})` }"
+    ></div>
     <div class="item-title">{{ title }}</div>
     <div class="item-desc">
       {{ desc }}
     </div>
-    <app-button
-    class="item-button"
-    :route="route"
-    value="перейти"/>
+    <app-button class="item-button" :route="route" value="перейти" />
   </div>
 </template>
 
 <script>
-import AppButton from "./AppButton.vue"
+import AppButton from "./AppButton.vue";
 
 export default {
   components: {
-    AppButton
+    AppButton,
   },
   props: {
-    icon: {type: String, required: true},
-    title: {type: String, required: true},
-    desc: {type: String, required: true},
-    route: {type: String, required: true}
+    icon: { type: String, required: true },
+    title: { type: String, required: true },
+    desc: { type: String, required: true },
+    route: { type: String, required: true },
   },
 
   data() {
     return {
       image: this.icon,
-      bgImg: {backgroundImage:`url(${this.image})`}
-    }
-  }
-
-
+      bgImg: { backgroundImage: `url(${this.image})` },
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/colors.scss";
-
-
 
 .item {
   position: relative;
@@ -118,11 +113,11 @@ export default {
 
   &-button {
     position: absolute;
-      left: 50px;
-      bottom: 10px;
-      text-transform: uppercase;
-      font-size: 18px;
-      font-weight: 600;
+    left: 50px;
+    bottom: 10px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
   }
 
   &:hover > &-head {
@@ -138,6 +133,12 @@ export default {
     &:hover {
       background: #eee;
     }
+  }
+}
+
+@media (max-width: 450px) {
+  .item:first-child {
+    margin-top: 20px;
   }
 }
 </style>
