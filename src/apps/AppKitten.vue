@@ -1,6 +1,6 @@
 <template>
   <div>
-    kitten
+
   </div>
 </template>
 
