@@ -45,7 +45,7 @@ export default {
 .body {
   position: relative;
   font-family: "Roboto", sans-serif;
-  height: 100vh;
+  height: 90vh;
 
   &.noscroll {
     max-height: 100%;
@@ -81,7 +81,7 @@ export default {
 
 @media (max-width: 450px) {
   .content {
-    padding: 0;
+    padding: 5px;
   }
 }
 </style>

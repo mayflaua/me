@@ -11,6 +11,7 @@
     "jquery": "^3.6.0",
     "kaboom": "^2000.2.9",
     "mathjs": "^10.6.1",
+    "swiped-events": "^1.1.6",
     "telegraf": "^4.8.5",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
