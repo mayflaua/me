@@ -396,7 +396,7 @@ input[type="checkbox"] {
 
       position: absolute;
       bottom: 100%;
-      left: -200%;
+      left: -120px;
       transform: translate(-50%, -8px);
 
       z-index: 2;

@@ -13,6 +13,7 @@
 
 <script>
 import swiped from "swiped-events";
+let run;
 
 export default {
   data: () => ({
@@ -56,7 +57,6 @@ export default {
 
     let applePosition = [];
     let snakeBody = [];
-    let run;
 
     let currAlpha = 1;
 
@@ -322,7 +322,7 @@ export default {
         movePassed = true;
       }
     });
-    window.addEventListener("swiped", (e) => {
+    canvas.addEventListener("swiped", (e) => {
       if (e.target == canvas) {
         if (e.detail.dir == "up" && direction != 3) direction = 1;
         if (e.detail.dir == "right" && direction != 4) direction = 2;
@@ -335,7 +335,12 @@ export default {
 
     // initial clearing
     clearPosition();
-    waitScreen(); 
+    waitScreen();
+  },
+
+  unmounted() {
+    clearInterval(run);
+    window.removeEventListener("resize", this.setCanvasSize);
   },
 };
 </script>

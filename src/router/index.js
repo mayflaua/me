@@ -8,6 +8,7 @@ import AppMain from '@/components/AppMain'
 
 import AppCalculator from '@/apps/AppCalculator'
 import AppPassGen from '@/apps/AppPassGen'
+import AppGrocery from '@/apps/AppGrocery'
 
 import AppSnake from '@/apps/AppSnake'
 import AppKitten from '@/apps/AppKitten'
@@ -42,6 +43,12 @@ const routes = [
     path: "/tools/password-generator",
     component: AppPassGen,
     meta: {title: "Генератор паролей"}
+  },
+  {
+    name: "grocery",
+    path: "/tools/grocery",
+    component: AppGrocery,
+    meta: {title: "Список покупок"}
   },
     //////////////// GAMES
  
