@@ -430,7 +430,8 @@ const GroceryList = {
     },
 
     updateProduct(state, { value, num, unit }) {
-      let obj = state.products.filter(obj => obj.value === value.toLowerCase())[0]
+      let obj = state.products.filter(obj => obj.value.toLowerCase() === value.toLowerCase())[0]
+      obj.value = value
       obj.quantity + num <= 128 ?
         obj.quantity += num :
         obj.quantity = 128
@@ -455,9 +456,8 @@ const GroceryList = {
 
   actions: {
     addProduct(store, { value, quantity, unit }) {
-      value = value.toLowerCase()
       let products = store.state.products
-      let productExists = products.some(obj => obj.value == value)
+      let productExists = products.some(obj => obj.value.toLowerCase() == value.toLowerCase())
 
       // обновить продукт если уже есть такой
       if (productExists) {
