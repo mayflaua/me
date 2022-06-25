@@ -4,6 +4,7 @@
       <div class="list-input">
         <el-autocomplete
           clearable
+          hide-loading
           size="large"
           :style="{ width: '100%' }"
           v-model="inputValue"
@@ -54,22 +55,46 @@
     </div>
 
     <div class="products">
-      <transition-group name="fade">
-        <AppProduct
-          v-for="product in products"
-          :key="product.value"
-          :value="product.value"
-          :quantity="product.quantity"
-          :checked="product.checked"
-          :unit="product.unit"
-        />
-      </transition-group>
+      <div class="list-controls">
+        <button class="list-add-separator" @click="addSeparator" title="Добавить разделитель"></button>
+      </div>
+      
+      <draggable
+        tag="transition-group"
+        :component-data="{ name: 'fade', mode: 'out-in' }"
+        v-model="products"
+        item-key="id"
+        ghost-class="ghost"
+        @change="$store.dispatch('updateProductsList', products)"
+      >
+        <template #item="{ element }">
+          <div>
+          <AppProduct
+            :id="element.id"
+            :value="element.value"
+            :quantity="element.quantity"
+            :checked="element.checked"
+            :unit="element.unit"
+            :isSeparator="element.isSeparator"
+          ></AppProduct></div>
+        </template>
+      </draggable>
+      <el-button
+        v-if="$store.getters.allChecked"
+        type="primary"
+        round
+        size="large"
+        class="list-clear"
+        @click="clearList"
+        >Очистить</el-button
+      >
     </div>
   </div>
 </template>
 
 <script>
 import AppProduct from "@/components/AppProduct.vue";
+import draggable from "vuedraggable";
 import {
   ElButton,
   ElSelect,
@@ -86,6 +111,7 @@ export default {
     ElInputNumber,
     ElAutocomplete,
     ElOption,
+    draggable,
   },
 
   data() {
@@ -134,19 +160,30 @@ export default {
         cb(result);
       }
     },
+    addSeparator() {
+      this.$store.dispatch("addSeparator");
+    },
 
     addProduct() {
-      this.$store.dispatch("addProduct", {
-        value: this.inputValue,
-        quantity: this.quantity,
-        unit: this.selectedUnit,
-      });
-      this.quantity = 1;
-      this.inputValue = "";
+      if (this.inputValue !== "") {
+        this.$store.dispatch("addProduct", {
+          value: this.inputValue,
+          quantity: this.quantity,
+          unit: this.selectedUnit,
+        });
+        this.quantity = 1;
+        this.inputValue = "";
+      }
     },
 
     removeProduct(value) {
       this.$store.dispatch("removeProduct", value);
+    },
+
+    clearList() {
+      this.$store.dispatch("clearList");
+      this.$store.dispatch("loadProductsList");
+      this.products = this.$store.getters.products;
     },
 
     onQuantityHover() {
@@ -167,7 +204,6 @@ export default {
       return this.$store.getters.totalProducts;
     },
   },
-
   mounted() {
     this.$store.dispatch("loadProductsList");
     this.products = this.$store.getters.products;
@@ -194,8 +230,8 @@ export default {
 }
 
 .grocery-list {
-  margin: 50px;
-  width: 80%;
+  margin: 10px auto;
+  width: 90%;
   height: 800px;
 
   border: 1px solid var(--el-border-color);
@@ -227,6 +263,28 @@ export default {
 .list-units {
   width: 100px;
 }
+.list-controls {
+  width: 100%;
+  min-height: 25px;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+
+.list-add-separator {
+  width: 30px;
+  height: 100%;
+
+  background-color: #fff;
+  background-image: url("@/assets/separator.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  outline: none;
+  border: 1px solid #cfd3dc;
+  border-radius: 3px;
+}
 
 .underinput {
   display: flex;
@@ -239,9 +297,24 @@ export default {
 .list-quantity {
   display: block;
   min-width: 120px;
-
 }
+
+.list-clear {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 100px;
+
+  box-shadow: var(--el-box-shadow);
+}
+
 .products {
+  position: relative;
+
   height: 100%;
   width: 100%;
   display: flex;
@@ -250,6 +323,16 @@ export default {
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  & .ghost {
+    border-left: 5px solid rgb(172, 172, 172);
+    box-shadow: var(--el-box-shadow-dark);
+    opacity: .7;
+  }
+
+  & .sortable-drag {
+    opacity: 0;
   }
 }
 </style>

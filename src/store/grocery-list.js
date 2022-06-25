@@ -425,8 +425,8 @@ const GroceryList = {
       state.products.push(obj)
     },
 
-    removeProduct(state, value) {
-      state.products.splice(state.products.findIndex(product => product.value === value.toLowerCase()), 1)
+    removeProduct(state, key) {
+      state.products.splice(state.products.findIndex(product => product.id === key), 1)
     },
 
     updateProduct(state, { value, num, unit }) {
@@ -436,10 +436,16 @@ const GroceryList = {
         obj.quantity += num :
         obj.quantity = 128
       obj.unit = unit
+      obj.checked = false
     },
 
-    checkProduct(state, value) {
-      let index = state.products.findIndex(product => product.value === value.toLowerCase())
+    updateValue(state, { id, value }) {
+      let obj = state.products.filter(obj => obj.id == id)[0]
+      obj.value = value
+    },
+
+    checkProduct(state, id) {
+      let index = state.products.findIndex(product => product.id === id)
       state.products[index].checked = !state.products[index].checked
     },
 
@@ -448,13 +454,33 @@ const GroceryList = {
         state.products = JSON.parse(localStorage.products) : []
     },
 
-    updateProductsList(state) {
+    updateLocalStorage(state) {
       localStorage.products = JSON.stringify(state.products)
+    },
+
+    updateProductsList(state, newList) {
+      state.products = newList
+    },
+
+    clearList(state) {
+      state.products = []
     }
 
   },
 
   actions: {
+    addSeparator(store) {
+      store.commit("insertProduct", {
+        value: 'Разделитель',
+        quantity: 1,
+        unit: '',
+        checked: true,
+        isSeparator: true,
+        id: Date.now()
+      })
+      store.commit('updateLocalStorage')
+    },
+
     addProduct(store, { value, quantity, unit }) {
       let products = store.state.products
       let productExists = products.some(obj => obj.value.toLowerCase() == value.toLowerCase())
@@ -464,7 +490,7 @@ const GroceryList = {
         store.commit('updateProduct', {
           value: value,
           num: quantity,
-          unit: unit
+          unit: unit,
         })
       }
       // если такого нет в списке
@@ -473,31 +499,49 @@ const GroceryList = {
           value: value,
           quantity: quantity,
           checked: false,
-          unit: unit
+          unit: unit,
+          id: Date.now(),
         })
       }
 
-      store.commit('updateProductsList')
+      store.commit('updateLocalStorage')
     },
 
-    removeProduct(store, value) {
-      store.commit('removeProduct', value)
-      store.commit('updateProductsList')
+    removeProduct(store, id) {
+      store.commit('removeProduct', id)
+      store.commit('updateLocalStorage')
 
     },
-    checkProduct(store, value) {
-      store.commit('checkProduct', value)
+    checkProduct(store, id) {
+      store.commit('checkProduct', id)
     },
 
     loadProductsList(store) {
       store.commit('loadProductsList')
-    }
+    },
 
+    updateProductsList(store, newList) {
+      store.commit('updateProductsList', newList)
+      store.commit('updateLocalStorage')
+    },
+
+    updateValue(store, { id, value }) {
+      store.commit("updateValue", { id, value })
+      store.commit('updateLocalStorage')
+
+    },
+
+    clearList(store) {
+      store.commit("clearList")
+      store.commit('updateLocalStorage')
+
+    }
   },
 
   getters: {
     products: state => state.products,
     suggestions: state => state.suggestions,
+    allChecked: state => state.products.filter(obj => obj.checked).length == state.products.length && state.products.length > 0
   },
 
   strict: process.env.NODE_ENV !== "production",
