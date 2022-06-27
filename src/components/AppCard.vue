@@ -1,6 +1,20 @@
 <template>
   <div class="item">
-    <div class="item-head"></div>
+    <div class="item-head">
+      <div class="item-head__info"></div>
+      <div class="item-head__info-list">
+        <div
+          v-for="tech in techs"
+          :key="tech"
+          class="item-head__info-list-item"
+          :style="{
+            backgroundImage: `url(${require('@/assets/techs/' +
+              tech +
+              '.png')})`,
+          }"
+        ></div>
+      </div>
+    </div>
     <div
       class="item-avatar"
       :style="{ backgroundImage: `url(${require('@/assets/' + icon)})` }"
@@ -35,13 +49,7 @@ export default {
     disabled: { type: Boolean, default: false },
     isLink: { type: Boolean, default: false },
     link: { type: String, default: "/" },
-  },
-
-  data() {
-    return {
-      image: this.icon,
-      bgImg: { backgroundImage: `url(${this.image})` },
-    };
+    techs: { type: Array, required: true },
   },
 };
 </script>
@@ -66,10 +74,61 @@ export default {
     position: absolute;
     width: 100%;
     height: 130px;
+
     background-color: $main-color;
     border-radius: 35px 35px 0 0;
 
     transition: all 0.3s ease;
+
+    overflow: hidden;
+
+    &__info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      width: 20px;
+      height: 20px;
+
+      background-image: url("@/assets/info.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      cursor: help;
+
+      &:hover {
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 60px;
+        background: none;
+      }
+
+      &:hover ~ .item-head__info-list {
+        top: 0;
+      }
+
+      &-list {
+        transition: 0.2s ease;
+        pointer-events: none;
+        width: 100%;
+        height: 60px;
+        position: absolute;
+        top: -60px;
+
+        background: $dark-color2;
+
+        display: flex;
+
+        &-item {
+          width: 20px;
+          height: 20px;
+          margin: 20px 0 20px 20px;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+      }
+    }
   }
 
   &-avatar {

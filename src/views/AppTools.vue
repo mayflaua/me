@@ -7,6 +7,7 @@
       :title="item.title"
       :desc="item.desc"
       :route="item.route"
+      :techs="item.techs"
     />
   </div>
 </template>
@@ -22,18 +23,21 @@ export default {
         title: "калькулятор",
         desc: "Простой калькулятор, прямо как на телефоне. Считает плюсы и минусы и вообще прикольный",
         route: "calculator",
+        techs: ["html", "css", "vue", "js"],
       },
       {
         icon: "pass.png",
         title: "генератор паролей",
         desc: "Генератор паролей с выбором опций (криптографически небезопасные)",
         route: "password-generator",
+        techs: ["html", "css", "js"],
       },
       {
         icon: "grocery.png",
         title: "список покупок",
         desc: "По статистике, поход в магазин со списком покупок снижает шанс импульсивных покупок",
         route: "grocery",
+        techs: ["html", "css", "vue", "js", "element-plus"],
       },
     ],
   }),

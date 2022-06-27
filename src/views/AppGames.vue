@@ -8,6 +8,7 @@
       :desc="item.desc"
       :route="item.route"
       :disabled="item.disabled"
+      :techs="item.techs"
     />
   </div>
 </template>
@@ -23,12 +24,14 @@ export default {
         title: "змейка",
         desc: " Неоновая змейка собирает неоновые яблоки. Поможете?",
         route: "snake",
+        techs: ["js"],
       },
       {
         icon: "kitten.png",
         title: "котенок",
         desc: "Котенок всеми силами избегает летучих мышей и.. огурцов. Понаблюдайте, поуправляйте :)",
         route: "kitten",
+        techs: [ "js", "kaboomjs"],
         disabled: window.innerWidth < 1366,
       },
     ],
