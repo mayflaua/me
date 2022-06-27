@@ -1,18 +1,9 @@
 <template>
   <app-back-button />
-  <div class="sent">
-    Форма должна была быть отправлена, но что-то пошло не так...
-  </div>
-  <img
-    :class="loaded ? 'loaded' : ''"
-    class="loading"
-    src="@/assets/loading.gif"
-  />
-  <div :class="loaded ? 'loaded' : ''" class="confession">
-    Отправка формы недоступна в связи с отсутствием у автора навыка :(
-  </div>
+  <div class="sent">Форма успешно отправлена!</div>
+
   <div :class="loaded ? 'loaded' : ''" class="links">
-    Но со мной можно связаться другими способами!
+    Так же вы можете связаться со мной другими способами:
   </div>
   <a
     :class="loaded ? 'loaded' : ''"
@@ -44,7 +35,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.loaded = true;
-    }, 3000);
+    }, 1000);
   },
 };
 </script>

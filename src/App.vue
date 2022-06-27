@@ -46,6 +46,7 @@ export default {
   position: relative;
   font-family: "Roboto", sans-serif;
   height: 90vh;
+  overflow-x: hidden;
 
   &.noscroll {
     max-height: 100%;

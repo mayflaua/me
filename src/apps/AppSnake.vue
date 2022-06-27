@@ -1,4 +1,5 @@
 <template>
+  <app-back-button />
   <div class="snake-game">
     <canvas id="snake" :width="width" :height="height">snake game</canvas>
     <button
@@ -13,9 +14,13 @@
 
 <script>
 import swiped from "swiped-events";
+import AppBackButton from "@/components/AppBackButton";
 let run;
 
 export default {
+  components: {
+    AppBackButton,
+  },
   data: () => ({
     width: 100,
     height: 100,

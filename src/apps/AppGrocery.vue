@@ -1,4 +1,5 @@
 <template>
+  <app-back-button />
   <div class="grocery-list">
     <div class="input-wrapper">
       <div class="list-input">
@@ -56,9 +57,13 @@
 
     <div class="products">
       <div class="list-controls">
-        <button class="list-add-separator" @click="addSeparator" title="Добавить разделитель"></button>
+        <button
+          class="list-add-separator"
+          @click="addSeparator"
+          title="Добавить разделитель"
+        ></button>
       </div>
-      
+
       <draggable
         tag="transition-group"
         :component-data="{ name: 'fade', mode: 'out-in' }"
@@ -69,14 +74,15 @@
       >
         <template #item="{ element }">
           <div>
-          <AppProduct
-            :id="element.id"
-            :value="element.value"
-            :quantity="element.quantity"
-            :checked="element.checked"
-            :unit="element.unit"
-            :isSeparator="element.isSeparator"
-          ></AppProduct></div>
+            <AppProduct
+              :id="element.id"
+              :value="element.value"
+              :quantity="element.quantity"
+              :checked="element.checked"
+              :unit="element.unit"
+              :isSeparator="element.isSeparator"
+            ></AppProduct>
+          </div>
         </template>
       </draggable>
       <el-button
@@ -93,6 +99,8 @@
 </template>
 
 <script>
+import AppBackButton from '@/components/AppBackButton'
+
 import AppProduct from "@/components/AppProduct.vue";
 import draggable from "vuedraggable";
 import {
@@ -106,6 +114,7 @@ import {
 export default {
   components: {
     AppProduct,
+    AppBackButton,
     ElButton,
     ElSelect,
     ElInputNumber,
@@ -328,7 +337,7 @@ export default {
   & .ghost {
     border-left: 5px solid rgb(172, 172, 172);
     box-shadow: var(--el-box-shadow-dark);
-    opacity: .7;
+    opacity: 0.7;
   }
 
   & .sortable-drag {

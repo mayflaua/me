@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import AppButton from "./AppButton";
+  import AppButton from "@/components/AppButton.vue";
 
 export default {
   components: {

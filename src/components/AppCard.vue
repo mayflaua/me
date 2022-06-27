@@ -9,7 +9,7 @@
     <div class="item-desc">
       {{ desc }}
     </div>
-    <app-button class="item-button" :route="route" value="перейти" />
+    <app-button class="item-button" :route="route" value="перейти" :disabled="disabled"/>
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
     title: { type: String, required: true },
     desc: { type: String, required: true },
     route: { type: String, required: true },
+    disabled: {type: Boolean, default: false}
   },
 
   data() {

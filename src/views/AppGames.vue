@@ -7,12 +7,13 @@
       :title="item.title"
       :desc="item.desc"
       :route="item.route"
+      :disabled="item.disabled"
     />
   </div>
 </template>
 
 <script>
-import AppCard from "./AppCard.vue";
+import AppCard from "@/components/AppCard.vue";
 
 export default {
   data: () => ({
@@ -28,6 +29,7 @@ export default {
         title: "котенок",
         desc: "Котенок всеми силами избегает летучих мышей и.. огурцов. Понаблюдайте, поуправляйте :)",
         route: "kitten",
+        disabled: window.innerWidth < 1366,
       },
     ],
   }),

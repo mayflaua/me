@@ -16,7 +16,7 @@
 
   <div v-else class="separator">
     <div class="separator-value">
-      <input v-model.lazy="value" @change="updateSeparatorValue(id, value)" />
+      <input v-model.lazy="value" placeholder="Разделитель" @change="updateSeparatorValue(id, value)" />
     </div>
     <el-button
       type="danger"

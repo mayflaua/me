@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AppTools from '@/components/AppTools'
-import AppGames from '@/components/AppGames'
-import AppContact from '@/components/AppContact'
-import AppSites from '@/components/AppSites'
-import App404 from '@/components/App404'
-import AppMain from '@/components/AppMain'
+import AppTools from '@/views/AppTools'
+import AppGames from '@/views/AppGames'
+import AppContact from '@/views/AppContact'
+import AppSites from '@/views/AppSites'
+import App404 from '@/views/App404'
+import AppMain from '@/views/AppMain'
 
 import AppCalculator from '@/apps/AppCalculator'
 import AppPassGen from '@/apps/AppPassGen'
@@ -16,7 +16,6 @@ import AppKitten from '@/apps/AppKitten'
 import AppPortfolio from '@/apps/AppPortfolio'
 
 import AppFormSent from '@/components/AppFormSent'
-
 
 const routes = [
   {

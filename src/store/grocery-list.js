@@ -471,7 +471,7 @@ const GroceryList = {
   actions: {
     addSeparator(store) {
       store.commit("insertProduct", {
-        value: 'Разделитель',
+        value: '',
         quantity: 1,
         unit: '',
         checked: true,
