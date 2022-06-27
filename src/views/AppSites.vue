@@ -7,6 +7,8 @@
       :title="item.title"
       :desc="item.desc"
       :route="item.route"
+      :isLink="item.isLink"
+      :link="item.link"
     />
   </div>
 </template>
@@ -26,6 +28,9 @@ export default {
         title: "портфолио",
         desc: "Первый проект, сайт-портфолио",
         route: "portfolio",
+
+        isLink: true,
+        link: "https://mayflaua.github.io/",
       },
     ],
   }),

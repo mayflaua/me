@@ -1,11 +1,20 @@
 <template>
   <router-link
+    v-if="!isLink"
     :to="{ name: route }"
     class="button"
     :class="disabled ? 'disabled' : ''"
   >
     {{ value }}
   </router-link>
+  <a
+    v-else
+    target="_blank"
+    :href="link"
+    class="button"
+    :class="disabled ? 'disabled' : ''"
+    >{{ value }}</a
+  >
 </template>
 
 <script>
@@ -14,6 +23,8 @@ export default {
     route: { type: String, required: true },
     value: { type: String, required: true },
     disabled: { type: Boolean, default: false },
+    isLink: { type: Boolean, default: false },
+    link: { type: String, default: "/" },
   },
 };
 </script>
